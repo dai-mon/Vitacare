@@ -1,0 +1,380 @@
+:root {
+    --primary: #1d3557;
+    --accent: #e63946;
+    --light: #f1faee;
+    --secondary: #457b9d;
+    --background: #f8f9fa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background: var(--background);
+    transition: 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background: #121212;
+    color: #f1f1f100;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.login-card {
+
+    width: 50%;
+    /* Ajusta este valor según el tamaño deseado */
+    height: auto;
+    /* Mantiene la proporción de la imagen */
+}
+
+.login-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 5022px;
+    /* Ajusta este valor según el tamaño deseado */
+
+
+}
+
+.input-icon {
+    position: absolute;
+    right: -250px;
+    font-size: 1.2em;
+    color: #888;
+    pointer-events: none;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.tab {
+    padding: 12px 20px;
+    background: var(--light);
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.tab.active {
+    background: var(--secondary);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.content-section {
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+    transition: transform 0.3s;
+}
+
+.content-section:hover {
+    transform: translateY(-5px);
+}
+
+.mood-tracker,
+.goals-list,
+.recommendations {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.recommendations li,
+.goals-list li {
+    display: flex;
+    align-items: center;
+    background: var(--light);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1.1em;
+}
+
+.glucose-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 2px solid var(--primary);
+}
+
+.mood-card {
+    padding: 20px;
+    background: var(--light);
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.mood-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn,
+.btn-danger,
+.btn-download {
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover,
+.btn-download:hover {
+    transform: scale(1.05);
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+:root {
+    --primary: #1d3557;
+    --accent: #e63946;
+    --light: #f1faee;
+    --secondary: #457b9d;
+    --background: #f8f9fa;
+    --input-border: #ddd;
+}
+
+body {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.login-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 380px;
+    width: 90%;
+    text-align: center;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    padding-left: 35px;
+    /* space for icon */
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: var(--accent);
+    outline: none;
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    color: #888;
+    pointer-events: none;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background: var(--primary);
+    transform: scale(1.02);
+}
+
+.register-prompt {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 15px;
+}
+
+.link-accent {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link-accent:hover {
+    text-decoration: underline;
+}
+
+/* Estilos responsivos para dispositivos pequeños */
+@media (max-width: 768px) {
+
+    .container,
+    .login-card,
+    .content-section {
+        padding: 15px;
+        width: 100%;
+    }
+
+    .nav-tabs {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .tab {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    input,
+    .btn {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    .btn,
+    .btn-download {
+        font-size: 0.9em;
+    }
+
+    /* Ajuste para el canvas de la gráfica */
+    #glucoseChart,
+    #progressChart {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-tabs {
+        font-size: 0.8em;
+        padding: 5px;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .siderbar {
+        height: 100vh; /* Ocupa toda la altura de la pantalla */
+        overflow-y: auto; /* Habilita el desplazamiento vertical */
+        background-color: #f8f9fa; /* Fondo claro */
+        padding: 10px; /* Espaciado interno */
+        border-right: 1px solid #ccc; /* Línea divisoria */
+        width: 250px; /* Ancho fijo del menú */
+        box-shadow: inset 0 -5px 5px -5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .tab {
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        background-color: #e9ecef; /* Fondo de las pestañas */
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+    
+    .tab:hover {
+        background-color: #d1d8de; /* Color al pasar el cursor */
+    }
+    
+    .tab.active {
+        background-color: #007bff; /* Color de la pestaña activa */
+        color: white;
+    }
+    
+}

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitaCare - Control de Diabetes</title>
+    <link rel="stylesheet" href="sec.css">
+</head>
+<style>
+    /* Botón de menú */
+.menu-icon {
+    position: fixed;
+    top: 50px; /* Más abajo que antes */
+    left: 10px;
+    z-index: 20; /* Por encima del menú */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.menu-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Menú lateral (desplegable) */
+.siderbar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Oculto inicialmente */
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+    width: 250px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    transition: left 0.3s ease; /* Animación suave al abrir/cerrar */
+}
+
+/* Menú abierto */
+.siderbar.open {
+    left: 0;
+}
+
+/* Botón de cierre (X) */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    color: #333;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Ajuste del contenido principal */
+.container {
+    margin-left: 0; /* Inicialmente no desplazado */
+    transition: margin-left 0.3s ease;
+}
+
+/* Desplazamiento del contenido cuando el menú está abierto */
+.container.shift {
+    margin-left: 250px; /* Desplazado cuando el menú está abierto */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 10px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+}
+</style>
+
+<body>
+    <div id="mainContent">
+        <div class="container">
+            <!-- Botón de menú -->
+            <button id="menuToggle" class="menu-icon" onclick="toggleSidebar()">☰</button>
+
+            <!-- Menú lateral -->
+            <div class="siderbar">
+                <button class="close-btn">X</button> <!-- Botón de cierre -->
+                <div class="tab active" onclick="changeTab(this, 'moodSection')">Estado de Ánimo</div>
+                <div class="tab" onclick="changeTab(this, 'dietSection')">Dieta</div>
+                <div class="tab" onclick="changeTab(this, 'healthSection')">Salud</div>
+                <div class="tab" onclick="changeTab(this, 'goalsSection')">Metas de Salud</div>
+                <div class="tab" onclick="changeTab(this, 'progressSection')">Progreso</div>
+                <div class="tab" onclick="changeTab(this, 'settingsSection')">Ajustes</div>
+                <div class="tab" onclick="changeTab(this, 'reportSection')">Historial</div>
+            </div>
+
+            <!-- Mood Section -->
+            <div id="moodSection" class="content-section">
+                <h2>¿Cómo te sientes hoy?</h2>
+                <div class="mood-tracker">
+                    <div class="mood-card" onclick="logMood('Bien')">
+                        <h3>😊 Bien</h3>
+                        <p>Me siento con energía</p>
+                    </div>
+                    <div class="mood-card" onclick="logMood('Regular')">
+                        <h3>😐 Regular</h3>
+                        <p>Podría estar mejor</p>
+                    </div>
+                    <div class="mood-card" onclick="logMood('Mal')">
+                        <h3>😔 Mal</h3>
+                        <p>No me siento bien</p>
+                    </div>
+                </div>
+                <h3>Historial de Estado de Ánimo</h3>
+                <ul id="moodHistory" class="mood-history"></ul>
+            </div>
+
+            <!-- Diet Section -->
+            <div id="dietSection" class="content-section" style="display: none;">
+                <h2>Control de Glucosa y Dieta</h2>
+                <div class="form-group">
+                    <input type="number" class="glucose-input" placeholder="Nivel de glucosa (mg/dL)">
+                    <button class="btn" onclick="analyzeDiet()">Analizar</button>
+                </div>
+                <ul class="recommendations">
+                    <li id="breakfastRecommendation">🍳 Desayuno: Avena con frutas bajas en azúcar</li>
+                    <li id="lunchRecommendation">🥗 Almuerzo: Proteína magra con verduras</li>
+                    <li id="dinnerRecommendation">🍲 Cena: Pescado con ensalada</li>
+                </ul>
+            </div>
+
+            <!-- Health Section -->
+            <div id="healthSection" class="content-section" style="display: none;">
+                <h2>Recomendaciones de Salud</h2>
+                <ul class="recommendations">
+                    <li>🩸 Mantén un registro diario de tus niveles de glucosa</li>
+                    <li>🏃‍♂️ Realiza ejercicio moderado por 30 minutos</li>
+                    <li>📅 Mantén un horario regular de comidas</li>
+                    <li>😌 Evita el estrés para mejorar tu salud</li>
+                    <li>💧 Toma al menos 2 litros de agua al día</li>
+                </ul>
+            </div>
+
+            <!-- Health Goals Section -->
+            <div id="goalsSection" class="content-section" style="display: none;">
+                <h2>Metas de Salud</h2>
+                <p>Establece y sigue tus metas de salud.</p>
+                <div class="form-group">
+                    <label for="goalName">Meta:</label>
+                    <input type="text" id="goalName" placeholder="Ejemplo: Bajar niveles de glucosa">
+                </div>
+                <div class="form-group">
+                    <label for="goalDeadline">Fecha límite:</label>
+                    <input type="date" id="goalDeadline">
+                </div>
+                <button class="btn" onclick="addGoal()">Guardar Meta</button>
+                <h3>Mis Metas</h3>
+                <ul id="goalsList" class="goals-list"></ul>
+            </div>
+
+            <!-- Progress Section -->
+            <div id="progressSection" class="content-section" style="display: none;">
+                <h2>Progreso</h2>
+                <p>Visualiza tu avance en los últimos meses.</p>
+                <canvas id="progressChart" width="400" height="200"></canvas>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settingsSection" class="content-section" style="display: none;">
+                <h2>Ajustes</h2>
+                <div class="settings-option">
+                    <span>Modo Oscuro</span>
+                    <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()">
+                </div>
+                <div class="settings-option">
+                    <span>Tamaño de letra</span>
+                    <select id="fontSizeSelect">
+                        <option>Pequeño</option>
+                        <option>Mediano</option>
+                        <option>Grande</option>
+                    </select>
+                </div>
+                <div class="settings-option">
+                    <span>Notificaciones</span>
+                    <input type="checkbox" checked>
+                </div>
+                <div class="settings-option">
+                    <span>Eliminar cuenta</span>
+                    <button class="btn-danger">Eliminar</button>
+                </div>
+            </div>
+
+            <!-- Report Section -->
+            <div id="reportSection" class="content-section" style="display: none;">
+                <h2>Historial de Glucosa</h2>
+                <canvas id="glucoseChart" width="400" height="200"></canvas>
+                <button class="btn-download">Descargar Reporte</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Seleccionar los elementos
+   const menuIcon = document.querySelector('.menu-icon');
+   const sidebar = document.querySelector('.siderbar');
+   const closeButton = document.querySelector('.close-btn');
+   const menuItems = document.querySelectorAll('.menu-item');
+   const container = document.querySelector('.container');
+   
+   // Abrir el menú
+   menuIcon.addEventListener('click', () => {
+       sidebar.classList.add('open');
+       container.classList.add('shift');
+   });
+   
+   // Cerrar el menú al hacer clic en la X
+   closeButton.addEventListener('click', () => {
+       sidebar.classList.remove('open');
+       container.classList.remove('shift');
+   });
+   
+   // Cerrar el menú al hacer clic en un botón del menú
+   menuItems.forEach(item => {
+       item.addEventListener('click', () => {
+           sidebar.classList.remove('open');
+           container.classList.remove('shift');
+       });
+   });
+   
+       </script>
+</body>
+
+</html>
